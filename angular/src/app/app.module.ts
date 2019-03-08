@@ -35,6 +35,19 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
 import { EventsComponent } from '@app/events/events.component';
 import { CreateEventComponent } from './events/create-event/create-event.component';
 import { EventDetailComponent } from './events/event-detail/event-detail.component';
+import { ConsumersComponent } from './consumers/consumers.component';
+import { CreateConsumerComponent } from './consumers/create-consumer/create-consumer.component';
+import { EditConsumerComponent } from './consumers/edit-consumer/edit-consumer.component';
+import { BatchComponent } from './batch/batch.component';
+import { CreateBatchComponent } from './batch/create-batch/create-batch.component';
+import { EditBatchComponent } from './batch/edit-batch/edit-batch.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { PackagesComponent } from './dashboard/packages/packages.component';
+import { TestsComponent } from './dashboard/tests/tests.component';
+import { ProfilesComponent } from './dashboard/profiles/profiles.component';
+import { SearchConsumerComponent } from './bookpackage/searchuser/searchuser.component';
+import { BookPackageComponent } from './bookpackage/bookpackage.component';
+import { SampleStatusComponent } from './samplestatus/samplestatus.component';
 
 @NgModule({
     declarations: [
@@ -58,7 +71,20 @@ import { EventDetailComponent } from './events/event-detail/event-detail.compone
         RightSideBarComponent,
         EventsComponent,
         CreateEventComponent,
-        EventDetailComponent
+        EventDetailComponent,
+        ConsumersComponent,
+        CreateConsumerComponent,
+        EditConsumerComponent,
+        BatchComponent,
+        CreateBatchComponent,
+        EditBatchComponent,
+        DashboardComponent,
+        PackagesComponent,
+        TestsComponent,
+        ProfilesComponent,
+        SearchConsumerComponent,
+        BookPackageComponent,
+        SampleStatusComponent
     ],
     imports: [
         CommonModule,

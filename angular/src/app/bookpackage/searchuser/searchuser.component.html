@@ -1,0 +1,41 @@
+﻿<div class="row clearfix" [@routerTransition]>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card main-content">
+            <div class="header">
+                <h2>
+                    Select Consumer
+                </h2>
+                <!-- <ul class="header-dropdown m-r--5">
+                    <i class="fa fa-spin fa-spinner" *ngIf="isTableLoading"></i>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block()" (click)="refresh();"><i
+                                        class="material-icons">refresh</i> {{l('Refresh')}}</a></li>
+                        </ul>
+                    </li>
+                </ul> -->
+            </div>
+            <div class="body">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <consumer-component #consumerComponent></consumer-component>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="isConsumerSelected" type="button" class="btn btn-default waves-effect" (click)="next()">
+                   NEXT
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

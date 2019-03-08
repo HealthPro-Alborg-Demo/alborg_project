@@ -57,7 +57,7 @@ export class CreateUserComponent extends AppComponentBase implements OnInit {
 
         this.user.roleNames = roles;
         this.saving = true;
-        this._userService.create(this.user)
+        this._userService.create(this.user,"/api/services/app/User/Create")
             .finally(() => { this.saving = false; })
             .subscribe(() => {
                 this.notify.info(this.l('SavedSuccessfully'));

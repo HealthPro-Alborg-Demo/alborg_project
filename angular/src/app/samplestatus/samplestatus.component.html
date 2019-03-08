@@ -1,0 +1,105 @@
+﻿<div class="row clearfix" [@routerTransition]>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card main-content">
+            <div class="header">
+                <h2>
+                    Sample Status
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <i class="fa fa-spin fa-spinner" *ngIf="isTableLoading"></i>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block()" (click)="refresh();"><i
+                                        class="material-icons">refresh</i> {{l('Refresh')}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="body table-responsive">
+                <!-- ******************************************************** -->
+                <table class="table table-hover table-striped" *ngIf="activeBatch.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Batch #</th>
+                            <th>Batch Date</th>
+                            <th>Sample Type</th>
+                            <th>Pick-Up Date</th>
+                            <th>Pick-Up Person</th>
+                            <th># Of Samples</th>
+                            <th>ETC (Date/Time)</th>
+                            <th>Status</th>
+                            <th>Remarks</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of activeBatch"
+                            style="cursor:pointer" (click)="onSelectBatch(item)">
+                            <td>{{item.batchNumber}}</td>
+                            <td>{{item.batchDate}}</td>
+                            <td>{{item.sampleType}}</td>
+                            <td>{{item.pickUpDate}}</td>
+
+                            <td>{{item.pickUpPerson}}</td>
+                            <td>{{item.sample}}</td>
+                            <td>{{item.etc}}</td>
+                            <td>{{item.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- ******************************************************** -->
+                <div class="text-center" *ngIf="activeBatch.length == 0">
+                    Not Available!
+                </div>
+                <!--  <div class="text-align: center;" *ngIf="totalItems > pageSize">
+                    <pagination-controls (pageChange)="getDataPage($event)" id="server"></pagination-controls>
+                </div>
+                <button type="button" data-toggle="modal" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right"
+                    (click)="createUser()">
+                    <i class="material-icons">add</i>
+                </button> -->
+            </div>
+            <div class="body table-responsive" *ngIf="selectedBatcgDetials.length > 0">
+                <!-- ******************************************************** -->
+                <table class="table table-hover table-striped" *ngIf="selectedBatcgDetials.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Bracode #</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Report Status</th>
+                            <th>All Reports Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of selectedBatcgDetials">
+                            <td>{{item.barCode}}</td>
+                            <td>{{item.Name}}</td>
+                            <td>{{item.Gender}}</td>
+                            <td>{{item.Age}}</td>
+                            <td>{{item.status}}</td>
+                            <td>{{item.allReportStatus}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- ******************************************************** -->
+                <div class="text-center" *ngIf="selectedBatcgDetials.length == 0">
+                    Not Available!
+                </div>
+                <!--  <div class="text-align: center;" *ngIf="totalItems > pageSize">
+                        <pagination-controls (pageChange)="getDataPage($event)" id="server"></pagination-controls>
+                    </div>
+                    <button type="button" data-toggle="modal" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right"
+                        (click)="createUser()">
+                        <i class="material-icons">add</i>
+                    </button> -->
+            </div>
+        </div>
+    </div>
+</div>

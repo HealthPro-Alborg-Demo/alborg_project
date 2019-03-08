@@ -51,8 +51,12 @@ export abstract class PagedListingComponentBase<EntityDto> extends AppComponentB
         this.list(req, page, () => {
             this.isTableLoading = false;
         });
+        // this.GetConsumerList(req, page, () => {
+        //     this.isTableLoading = false;
+        // });
     }
 
     protected abstract list(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void;
+   // protected abstract GetConsumerList(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void;
     protected abstract delete(entity: EntityDto): void;
 }

@@ -9,6 +9,11 @@ import { TenantsComponent } from './tenants/tenants.component';
 import { RolesComponent } from "app/roles/roles.component";
 import { EventsComponent } from "app/events/events.component";
 import { EventDetailComponent } from "app/events/event-detail/event-detail.component";
+import { ConsumersComponent } from './consumers/consumers.component';
+import { BatchComponent } from './batch/batch.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BookPackageComponent } from './bookpackage/bookpackage.component';
+import { SampleStatusComponent } from './samplestatus/samplestatus.component';
 
 @NgModule({
     imports: [
@@ -23,7 +28,12 @@ import { EventDetailComponent } from "app/events/event-detail/event-detail.compo
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },
                     { path: 'events', component: EventsComponent, data: { permission: 'Pages.Events' }, canActivate: [AppRouteGuard] },
                     { path: 'events/:eventId', component: EventDetailComponent },
-                    { path: 'about', component: AboutComponent }
+                    { path: 'about', component: AboutComponent },
+                    { path: 'consumers', component: ConsumersComponent},
+                    { path: 'batchsetup', component: BatchComponent},
+                    { path: 'dashboard', component: DashboardComponent},
+                    { path: 'bookpackage', component: BookPackageComponent},
+                    { path: 'samplestatus', component: SampleStatusComponent},
                 ]
             }
         ])

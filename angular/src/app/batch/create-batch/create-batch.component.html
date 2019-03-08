@@ -1,0 +1,102 @@
+﻿<div bsModal #createBatchModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="createBatchModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog">
+
+        <div #modalContent class="modal-content">
+
+            <form *ngIf="active" #createUserForm="ngForm" id="frm_create_user" novalidate (ngSubmit)="save()">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        <span>{{l("CreateNewBatch")}}</span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                        <li role="presentation" class="active"><a href="#user-details" data-toggle="tab">User Details</a></li>
+                        <li role="presentation"><a href="#user-roles" data-toggle="tab">User Roles</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane animated fadeIn active" id="user-details">
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="batchnumber" type="text" name="BatchNumber" [(ngModel)]="batch.BatchNumber" class="validate form-control">
+                                            <label for="batchnumber" class="form-label">{{l("BatchNumber")}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="batchdate" type="date" name="BatchDate" [(ngModel)]="batch.BatchDate" class="validate form-control">
+                                            <label for="batchdate" class="form-label">{{l("BatchDate")}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="sampletype" type="text" name="SampleType" [(ngModel)]="batch.SampleType" class="validate form-control">
+                                            <label for="sampletype" class="form-label">{{l("SampleType")}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="capacity" type="number" name="Capacity" [(ngModel)]="batch.Capacity" required class="validate form-control">
+                                            <label for="capacity" class="form-label">{{l("Capacity")}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group form-float">
+                                        <div class="">
+                                            <input id="isactive" type="checkbox" name="IsActive" [(ngModel)]="batch.isActive" checked class="form-control" />
+                                            <label for="isactive" class="form-label">{{l("IsActive")}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane animated fadeIn" id="user-roles">
+                            <div class="row">
+                                <div class="col-sm-12 ">
+                                    <ng-template ngFor let-role [ngForOf]="roles" let-roleIndex="index">
+                                        <div class="col-sm-6">
+                                            <input type="checkbox" name="role" value="{{role.normalizedName}}" title="{{role.description}}" class="filled-in" id="role-{{roleIndex}}" checked="checked" />
+                                            <label for="role-{{roleIndex}}" title="{{role.displayName}}">{{role.name}}</label>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default waves-effect" (click)="close()">
+                        {{l("Cancel")}}
+                    </button>
+                    <button [disabled]="!createUserForm.form.valid || saving" type="submit" class="btn btn-primary waves-effect">
+                        {{l("Save")}}
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
