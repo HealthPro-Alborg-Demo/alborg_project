@@ -42,11 +42,20 @@ namespace EventCloud.Lims.Dtos
         public Guid PatientId { get; set; }
         public int BarCodeId { get; set; }
         public string SampleCollectedDate { get; set; }
-        public int TestId { get; set; }
-        public string TestDescription { get; set; }
+        public List<LabTests> TestsBooked { get; set; }
     }
 
     public class LabTests
     {
+        public int TestId { get; set; }
+        public string TestDescription { get; set; }
+    }
+
+    public class AssignToBatch
+    {
+        public Guid BookedPackageId { get; set; }
+        public int BarCodeId { get; set; }
+        public Guid BatchDetailsId { get; set; }
+        public List<LabTests> AssignedTests { get; set; }
     }
 }

@@ -1072,6 +1072,76 @@ namespace EventCloud.Migrations
                     b.ToTable("AppEventRegistrations");
                 });
 
+            modelBuilder.Entity("EventCloud.LIMS.Package.BatchDetails", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BatchDate");
+
+                    b.Property<string>("BatchNumber");
+
+                    b.Property<int>("Capacity");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<long?>("DeleterUserId");
+
+                    b.Property<DateTime?>("DeletionTime");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<long?>("LastModifierUserId");
+
+                    b.Property<int>("NumberOfSamplesLeft");
+
+                    b.Property<int>("NumberOfSamplesPresent");
+
+                    b.Property<string>("SampleType");
+
+                    b.Property<int>("TenantId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BatchDetails");
+                });
+
+            modelBuilder.Entity("EventCloud.LIMS.Package.BookedPackage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("BarCodeId");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<long?>("DeleterUserId");
+
+                    b.Property<DateTime?>("DeletionTime");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<long?>("LastModifierUserId");
+
+                    b.Property<Guid>("PatientId");
+
+                    b.Property<string>("SampleCollectedDate");
+
+                    b.Property<int>("TenantId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BookedPackage");
+                });
+
             modelBuilder.Entity("EventCloud.LIMS.Package.HealthPackage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1110,6 +1180,120 @@ namespace EventCloud.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("HealthPackage");
+                });
+
+            modelBuilder.Entity("EventCloud.LIMS.Package.LabTest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("BookedPackageId");
+
+                    b.Property<string>("TestDescription");
+
+                    b.Property<int>("TestId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookedPackageId");
+
+                    b.ToTable("LabTest");
+                });
+
+            modelBuilder.Entity("EventCloud.LIMS.Package.Patient", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Age");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<long?>("DeleterUserId");
+
+                    b.Property<DateTime?>("DeletionTime");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<int>("Gender");
+
+                    b.Property<decimal>("Height");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<long?>("LastModifierUserId");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<int>("TenantId");
+
+                    b.Property<decimal>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Patient");
+                });
+
+            modelBuilder.Entity("EventCloud.LIMS.Package.TestBarcodeDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("BarcodeTestId");
+
+                    b.Property<Guid?>("TestBarcodeMappingId");
+
+                    b.Property<string>("TestDescription");
+
+                    b.Property<int>("TestId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TestBarcodeMappingId");
+
+                    b.ToTable("TestBarcodeDetails");
+                });
+
+            modelBuilder.Entity("EventCloud.LIMS.Package.TestBarcodeMapping", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("BarCodeId");
+
+                    b.Property<Guid>("BatchDetailsId");
+
+                    b.Property<Guid>("BookedPackageId");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<long?>("DeleterUserId");
+
+                    b.Property<DateTime?>("DeletionTime");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<long?>("LastModifierUserId");
+
+                    b.Property<int>("TenantId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TestBarcodeMapping");
                 });
 
             modelBuilder.Entity("EventCloud.MultiTenancy.Tenant", b =>
@@ -1323,6 +1507,21 @@ namespace EventCloud.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("EventCloud.LIMS.Package.LabTest", b =>
+                {
+                    b.HasOne("EventCloud.LIMS.Package.BookedPackage")
+                        .WithMany("LabTests")
+                        .HasForeignKey("BookedPackageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("EventCloud.LIMS.Package.TestBarcodeDetails", b =>
+                {
+                    b.HasOne("EventCloud.LIMS.Package.TestBarcodeMapping")
+                        .WithMany("TestBarcode")
+                        .HasForeignKey("TestBarcodeMappingId");
                 });
 
             modelBuilder.Entity("EventCloud.MultiTenancy.Tenant", b =>

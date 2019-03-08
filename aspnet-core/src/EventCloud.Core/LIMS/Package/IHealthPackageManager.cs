@@ -10,5 +10,7 @@ namespace EventCloud.LIMS.Package
         Task CreatePackageAsync(HealthPackage healthPackage);
         Task CreatePatientAsync(Patient patient);
         Task CreateBatchAsync(BatchDetails batchDetails);
+        Task<Guid> CreatePackageBookingAsync(BookedPackage bookedPackage);
+        Task AssignTestToBatch(TestBarcodeMapping barcodeMapper);
     }
 }

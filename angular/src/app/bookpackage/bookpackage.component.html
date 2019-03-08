@@ -1,0 +1,276 @@
+﻿<div class="row clearfix" [@routerTransition]>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card main-content">
+            <div class="header">
+                <h2>
+                    Book Package
+                    <div class="float-right" style="margin-top: -8px;" *ngIf="bookingOrderDetails.PatientName && bookingOrderDetails.PatientContact && bookingOrderDetails.PatientEmail && count > 0">
+                        <p class="patient-contact-detaisl"><span><i class="material-icons profile-icons">person</i></span>
+                            <span> {{bookingOrderDetails.PatientName}}</span></p>
+                        <!-- <p class="patient-contact-detaisl"><span class=""><i class="material-icons profile-icons">stay_current_portrait</i></span> <span> {{bookingOrderDetails.PatientContact}}</span></p> -->
+                        <p class="patient-contact-detaisl"><span class=""><i class="material-icons profile-icons">mail_outline</i></span>
+                            <span> {{bookingOrderDetails.PatientEmail}}</span></p>
+                    </div>
+                </h2>
+
+                <!-- <ul class="header-dropdown m-r--5">
+                    <i class="fa fa-spin fa-spinner" *ngIf="isTableLoading"></i>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block()" (click)="refresh();"><i
+                                        class="material-icons">refresh</i> {{l('Refresh')}}</a></li>
+                        </ul>
+                    </li>
+                </ul> -->
+            </div>
+            <div class="body">
+                <div class="row">
+                    <!-- <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-2 col-xs-2 text-center">
+                                <p>1</p>
+                                <p>Register Patient</p>
+                            </div>
+                            <div class="col-lg-2 col-sm-2 col-xs-2 text-center">
+                                <p>2</p>
+                                <p>Select Package</p>
+                            </div>
+                            <div class="col-lg-2 col-sm-2 col-xs-2 text-center">
+                                <p>3</p>
+                                <p>Proceed To Pay</p>
+                            </div>
+                            <div class="col-lg-3 col-sm-2 col-xs-2 text-center">
+                                <p>4</p>
+                                <p>Print Label / Barcode</p>
+                            </div>
+                            <div class="col-lg-3 col-sm-2 col-xs-2 text-center">
+                                <p>5</p>
+                                <p>Assign Batch / Store Box</p>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="count == 0">
+                                <consumer-component #consumerComponent></consumer-component>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="count ==1">
+                                <div class="row price-card-margin">
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 price-card m-r-5">
+                                        <span>Packages:</span> <span>{{packagesComponent.totalSelectedPackage.Count}} /
+                                            {{packagesComponent.totalSelectedPackage.TotalPrice}}</span>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 price-card m-r-5">
+                                        <span>Tests:</span> <span>{{testsComponent.totalSelectedTest.Count}} /
+                                            {{testsComponent.totalSelectedTest.TotalPrice}}</span>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 price-card m-r-5">
+                                        <span>Profiles:</span> <span>{{profilesComponent.totalSelectedProfile.Count}} /
+                                            {{profilesComponent.totalSelectedProfile.TotalPrice}}</span>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 float-right">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6">
+                                                <p class="total-price">
+                                                    <span>Total Price: </span>
+                                                    <span>{{packagesComponent.totalSelectedPackage.TotalPrice
+                                                        +
+                                                        testsComponent.totalSelectedTest.TotalPrice +
+                                                        profilesComponent.totalSelectedProfile.TotalPrice}}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <button [disabled]="packagesComponent.totalSelectedPackage.Count == 0 && testsComponent.totalSelectedTest.Count == 0 && profilesComponent.totalSelectedProfile.Count == 0"
+                                                    type="button" class="btn btn-default waves-effect pay-btn" (click)="next()">
+                                                    PROCEED TO PAY
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                        <package-component #packagesComponent></package-component>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                        <test-component #testsComponent></test-component>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                        <profile-component #profilesComponent></profile-component>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="count == 2">
+                                <p class="verification-after-payment">
+                                    <span>Verify Booking Order Details</span>
+                                    <span>
+                                        <button type="button" class="btn btn-default waves-effect next-btn float-right"
+                                            (click)="next()">
+                                            NEXT
+                                        </button>
+                                    </span>
+                                    <span class="payment-staus">Payment: Success (View Details)</span>
+                                </p>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf="bookingOrderDetails.Package.length > 0"
+                                    style="border-right: 2px solid #e5e5e5;">
+                                    <p class="verify-package">Health Packages</p>
+                                    <div class="row margin-0" *ngFor="let item of bookingOrderDetails.Package">
+                                        <p class="package-name">{{item.Name}}</p>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngFor="let test of item.TestIds">
+                                            <p><img alt="package-selected" class="package-verify-img" src="/assets/images/checked1.svg">
+                                                <span>{{test.TestName}}</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf="bookingOrderDetails.Profile.length > 0"
+                                    style="border-right: 2px solid #e5e5e5;">
+                                    <p class="verify-package">Lab Profile</p>
+                                    <div class="row margin-0" *ngFor="let item of bookingOrderDetails.Profile">
+                                        <p class="package-name">{{item.Name}}</p>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngFor="let test of item.TestIds">
+                                            <p><img alt="package-selected" class="package-verify-img" src="/assets/images/checked1.svg">
+                                                <span>{{test.TestName}}</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf="bookingOrderDetails.Test.length > 0">
+                                    <p class="verify-package">Lab Tests</p>
+                                    <div class="row margin-0" *ngFor="let item of bookingOrderDetails.Test">
+                                        <!-- <p class="package-name">{{item.Name}}</p> -->
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngFor="let test of item.TestIds">
+                                            <p><img alt="package-selected" class="package-verify-img" src="/assets/images/checked1.svg">
+                                                <span>{{test.TestName}}</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="count == 3">
+                                <p class="verification-after-payment">
+                                    <span>Labels to be printed <span> 3 </span></span>
+                                    <span class=""><button type="button" class="btn btn-default waves-effect print-btn"
+                                            (click)="print()"><span><i class="material-icons profile-icons" style="vertical-align: baseline;">print</i></span>
+                                            PRINT ALL
+                                        </button></span>
+                                    <span>
+                                        <button type="button" class="btn btn-default waves-effect next-btn float-right"
+                                            (click)="next()">
+                                            STORE IN BOX
+                                        </button>
+                                    </span>
+                                </p>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf="bookingOrderDetails.Package.length > 0"
+                                    style="border-right: 2px solid #e5e5e5;">
+                                    <p class="verify-package">Tests Needing <span class="sample-type"> BLOOD </span>
+                                        <span> Sample </span></p>
+                                    <div class="row margin-0" *ngFor="let item of bookingOrderDetails.Package">
+                                        <div class="col-lg-6 col-md-6 padding-0" style="border-right: 1px solid #e5e5e5;">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-0 font-11"
+                                                *ngFor="let test of item.TestIds">
+                                                <p><img alt="package-selected" class="package-scan-img" src="/assets/images/checked1.svg">
+                                                    <span>{{test.TestName}}</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <p class="text-center"><img alt="barcode" class="barcode-img" src="/assets/images/barcode.png"></p>
+                                            <p class="text-center" style="color: #e91e63;">OR</p>
+                                            <p class="text-center" (click)="print()"> <img alt="barcode" class="barcode-img" style="width:35%"
+                                                    src="/assets/images/printer.svg"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf="bookingOrderDetails.Profile.length > 0"
+                                    style="border-right: 2px solid #e5e5e5;">
+                                    <p class="verify-package">Tests Needing <span class="sample-type"> URINE </span>
+                                        <span> Sample </span></p>
+                                    <div class="row margin-0" *ngFor="let item of bookingOrderDetails.Profile">
+                                        <div class="col-lg-6 col-md-6 padding-0" style="border-right: 1px solid #e5e5e5;">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-0 font-11"
+                                                *ngFor="let test of item.TestIds">
+                                                <p><img alt="package-selected" class="package-scan-img" src="/assets/images/checked1.svg">
+                                                    <span>{{test.TestName}}</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <p class="text-center"><img alt="barcode" class="barcode-img" src="/assets/images/barcode.png"></p>
+                                            <p class="text-center" style="color: #e91e63;">OR</p>
+                                            <p class="text-center" (click)="print()"><img alt="barcode" class="barcode-img" style="width:35%"
+                                                    src="/assets/images/printer.svg"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf="bookingOrderDetails.Test.length > 0">
+                                    <p class="verify-package">Tests Needing <span class="sample-type"> STOOL </span>
+                                        <span> Sample </span></p>
+                                    <div class="row margin-0" *ngFor="let item of bookingOrderDetails.Test">
+                                        <div class="col-lg-6 col-md-6 padding-0" style="border-right: 1px solid #e5e5e5;">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-0 font-11"
+                                                *ngFor="let test of item.TestIds">
+                                                <p><img alt="package-selected" class="package-scan-img" src="/assets/images/checked1.svg">
+                                                    <span>{{test.TestName}}</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <p class="text-center"><img alt="barcode" class="barcode-img" src="/assets/images/barcode.png"></p>
+                                            <p class="text-center" style="color: #e91e63;">OR</p>
+                                            <p class="text-center" (click)="print()"> <img alt="barcode" class="barcode-img" style="width:35%"
+                                                    src="/assets/images/printer.svg"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="count == 4">
+                                <div class="body table-responsive">
+
+                                    <!-- ******************************************************** -->
+                                    <table class="table table-hover table-striped" *ngIf="batchList.length > 0">
+                                        <thead>
+                                            <tr>
+                                                <th>Batch #</th>
+                                                <th>Batch Date</th>
+                                                <th>Sample Type</th>
+                                                <th>Capacity (of the box)</th>
+                                                <th># Of Samples (In the Box)</th>
+                                                <th># Sample Remaining (In the Box)</th>
+                                                <th>Assign to this Sample</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of batchList | paginate: { id: 'server', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: totalItems }">
+                                                <td>{{item.batchNumber}}</td>
+                                                <td>{{item.batchDate}}</td>
+                                                <td>{{item.sampleType}}</td>
+                                                <td>{{item.capacity}}</td>
+                                                <td>{{item.numberOfSamplesPresent}}</td>
+                                                <td>{{item.numberOfSamplesLeft}}</td>
+                                                <td>
+                                                    <input type="checkbox" class="package-checkbox" name="{{item.batchNumber}}"
+                                                        [(ngModel)]="item.Selected">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="isConsumerSelected" type="button" class="btn btn-default waves-effect" (click)="prev()"
+                    *ngIf="count > 0">
+                    PREV
+                </button>
+                <button [disabled]="isConsumerSelected" type="button" class="btn btn-default waves-effect next-btn"
+                    (click)="next()">
+                    NEXT
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
